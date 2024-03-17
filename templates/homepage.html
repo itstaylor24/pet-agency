@@ -1,19 +1,23 @@
-{% extends 'base.html' %} {% block title %}A Forever Home Pet Agency{% endblock
-%} {% block content %}
+{% extends 'base.html' %} {% block content %}
 <div>
   <h1>A Forever Home Pet Agency</h1>
   <ul>
     {%for pet in all_pets%}
     <li>
-      <p>pet.name <a href="/{pet.id}""></a></p>
-      <p>pet.image_url</p>
-      <p>pet.available</p>
+      <a href="{{ url_for('display_edit_form', pet_id=pet.id) }}"
+        >{{ pet.name }} the {{pet.species}}</a
+      >
+      {%if pet.imageurl%}
+      <img class="img-thumbnail" src="{{ pet.imageurl()}}" />
+      {%endif%} {% if pet.available %}
+      <b> is available for adoption!</b> {%else%} <b> is unavailable</b>{% endif
+      %}
     </li>
     {%endfor%}
   </ul>
 </div>
 <div>
-  <a href="/add">Add Pet</a>
+  <a class="btn btn-primary" href="{{ url_for('add_pet') }}">Add Pet</a>
 </div>
 
 {%endblock%}

@@ -1,0 +1,17 @@
+{{ form.hidden_tag() }}
+<!-- the above code should be in every form -->
+{% for field in form if field.widget.input_type != 'hidden'%}
+<!-- we iteratate over all of the fileds that are not hidden -->
+
+<div class="form-group">
+  {{ field.label }} {{ field(class="form-control") }}
+  <!-- this creates the form  fields and labels -->
+
+  <span>
+    {% if field.errors %} {% for error in field.errors %}
+    <b class="text-danger">{{ error }}</b>
+    {% endfor %} {% endif %}
+  </span>
+</div>
+
+{% endfor %}
